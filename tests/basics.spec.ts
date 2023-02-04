@@ -34,17 +34,36 @@ test.describe("Login test cases", () => {
     test("I should be able to fill in", async ({ page })=> {
         await page.goto("https://qacart-todo.herokuapp.com/login");
         const emailField = page.locator("#login");
-        await emailField.fill("test@test.de");
-        await expect(emailField).toHaveValue("test@test.de");
+        await emailField.fill("test1234@test.de");
+        await expect(emailField).toHaveValue("test123@test.de");
 
     });
 
-    test("I should be able to fill the password", async ({ page })=> {
+    test("I should be able to fill the password by css", async ({ page })=> {
         await page.goto("https://qacart-todo.herokuapp.com/login");
         const passwordField = page.locator('[data-testid="password"]');
         await passwordField.fill("Test123");
-        await page.pause();
         await expect(passwordField).toHaveValue("Test123");
+
+    })
+
+    //Xpath //tagName[@attribute="value"]
+    test("I should be able to fill the password by xpath", async ({ page })=> {
+        await page.goto("https://qacart-todo.herokuapp.com/login");
+        const passwordField = page.locator('//input[@data-testid="password"]');
+        await passwordField.fill("Test123");
+        await expect(passwordField).toHaveValue("Test123");
+
+    })
+
+    test("I should be able to click on the submit button", async ({ page })=> {
+        await page.goto("https://qacart-todo.herokuapp.com/login");
+        await page.locator("#login").fill("test1234@test.de");
+        await page.locator('//input[@data-testid="password"]').fill("Test123");
+        const submitButton = page.locator('button:has-text("Login")');
+        await submitButton.click();
+        await expect(page).toHaveTitle("QAcart Todo App - Login page",{timeout: 60000} );
+     
 
     })
 });
