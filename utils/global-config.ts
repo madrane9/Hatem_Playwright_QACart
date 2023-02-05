@@ -9,10 +9,8 @@ async function globalConfig() {
         }
    
 })
-
-
+await requestContext.storageState({ path: 'storageState.json' });
 }
 
-  
 
 export default globalConfig;
