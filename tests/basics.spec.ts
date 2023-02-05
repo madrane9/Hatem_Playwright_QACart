@@ -6,6 +6,7 @@ test.describe("Login test cases", () => {
     // Open the Website https://qacart-todo.herokuapp.com/   test@playwright.de   Playwright1
         await page.goto("https://qacart-todo.herokuapp.com");
         await expect(page).toHaveTitle("QAcart Todo App - Login page");
+        
 });
     
     // var can we change it but const we can't change it later
@@ -20,8 +21,17 @@ test.describe("Login test cases", () => {
 
     test("header should be visible by text", async ({ page })=> {
         await page.goto("https://qacart-todo.herokuapp.com/login");
-        const header = page.locator('text=login to Application');
+
+        const header = page.locator('text=Login to Application');
         await expect(header).toBeVisible();
+       
+       //await expect(page.locator("//h2[text()='Login to Application']")).toHaveText('Login to Application');
+       
+       //await expect(page.locator("text=Login to Application")).toHaveText('Login to Application');
+
+       //const header = await page.locator("//h2[text()='Login to Application']");
+       //await expect(header).toHaveText("Login to Application");
+    
 
 });
     test("header should contain the correct text", async ({ page })=> {
@@ -35,7 +45,7 @@ test.describe("Login test cases", () => {
         await page.goto("https://qacart-todo.herokuapp.com/login");
         const emailField = page.locator("#login");
         await emailField.fill("test1234@test.de");
-        await expect(emailField).toHaveValue("test123@test.de");
+        await expect(emailField).toHaveValue("test1234@test.de");
 
     });
 

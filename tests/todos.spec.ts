@@ -1,12 +1,10 @@
 import {test, expect} from '@playwright/test';
 
 test.describe("Todo page test cases", () => {
+    test.use({ storageState: 'storageState.json' });
+
     test.beforeEach(async({page})=>{
         await page.goto("https://qacart-todo.herokuapp.com/login");
-        await page.locator("#login").fill("test1234@test.de");
-        await page.locator('//input[@data-testid="password"]').fill("Test123");
-        await page.locator('button:has-text("Login")').click();
-
     });
 test("should be able to mark a todo as completed", async({page})=>{
    
@@ -20,7 +18,7 @@ test("should be able to mark a todo as completed", async({page})=>{
 });
 
 test("welcome message should be diplayed", async( {page})=>{
-    const welcomeMessage = page.locator('[data-testid="welcome]');
+    const welcomeMessage = page.locator('[data-testid="welcome"]');
     await expect(welcomeMessage).toBeVisible();
 });
 });
